@@ -6,13 +6,7 @@ export const registerUser = (reqData) => async (dispatch) => {
     dispatch({ type: REGISTER_REQUEST })
     try {
 
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Register successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
+       
         const { data } = await axios.post(`${API_URL}/auth/signup`, reqData.userData);
         if (data.jwt) localStorage.setItem("jwt", data.jwt);
         if (data.role === "ROLE_RESTAURANT_OWNER") {
@@ -20,7 +14,13 @@ export const registerUser = (reqData) => async (dispatch) => {
         } else {
             reqData.navigate("/");
         }
-
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Register successfully",
+            showConfirmButton: false,
+            timer: 1500
+        });
 
         dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
         console.log("Register Success", data);
