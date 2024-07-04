@@ -23,12 +23,7 @@ export const createOrder = (reqData) => {
                 }
 
             );
-            await Swal.fire({
-                title: "create order succesfully",
-               timer:1500,
-               showConfirmButton:false,
-                icon: "success"
-              });
+         
             dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
             console.log("Order Created",data);
         } catch (error) {
