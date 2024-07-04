@@ -165,7 +165,7 @@ export const addAddress = (reqData) => async (dispatch) => {
             }
         });
         Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "address added successfully",
             showConfirmButton: false,

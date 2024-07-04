@@ -3,29 +3,80 @@ import HomeIcon from '@mui/icons-material/Home';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../State/Order/Action';
+import Swal from 'sweetalert2';
 
 
-const AddressCard = ({ item }) => {
+const AddressCard = ({ item, handleClose }) => {
 
-    // { cart, auth } = useSelector(store => store);
+    const { cart, auth } = useSelector(store => store);
+    const dispatch = useDispatch();
     // const dispatch = useDispatch();
-    const createOrderUsingSelectedAddress =  () => {
-        alert("Not devloped yet");
-        // const data = {
-        //     jwt: localStorage.getItem("jwt"),
+    const createOrderUsingSelectedAddress = () => {
+       
+        if (cart.cartItems.length == 0) {
+            let timerInterval;
+            Swal.fire({
+                icon: "question",
+                text: "Cart is empty",
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
 
-        //     restaurantId: cart.cartItems[0].food?.restaurant.id,
-        //     deliveryAddress: {
-        //         fullName: auth.user?.fullName,
-        //         streetAddress: item.streetAddress,
-        //         city: item.city,
-        //         mobile: item.mobile,
-        //         locationType: item.location
-        //     }
-        // }
-        // dispatch(createOrder(data));
+            });
+            return;
+        } else {
+            Swal.fire({
+                title: "Conform order ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                html: `
+                    <div style="display:block; font-size: 14px; color:black; border: 3px solid #ccc; padding: 10px;">
+                    <div><h1>Location Type : ${item?.locationType}</h1></div>
+                    <div><p>Address : ${item?.streetAddress}</p></div>
+                    <div><p>City : ${item?.city}</p></div>
+                    <div><p>Mobile : ${item?.mobile}</p></div>
+                    </div>
+                    <br/>
+                    <div style="display:block; font-size: 14px; color:black; border: 3px solid #ccc; padding: 10px;">
+                    <div><h1>Dilivery Free : 0.00</h1></div>
+                    <div><h1>Total Price : ${cart?.cart?.total}</h1></div>
+                  
+                    </div>
+    
+                `,
 
-   }
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await cart.cartItems?.map((cartItem) => {
+                        const data = {
+                            jwt: localStorage.getItem("jwt"),
+
+                            restaurantId: cartItem.food?.restaurant.id,
+                            deliveryAddress: {
+                                fullName: auth.user?.fullName,
+                                streetAddress: item.streetAddress,
+                                city: item.city,
+                                mobile: item.mobile,
+                                locationType: item.locationType
+                            }
+                        }
+                        dispatch(createOrder(data));
+
+                    })
+                    Swal.fire({
+                        title: "Order create successfully",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+
+
+    }
 
 
 
