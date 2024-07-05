@@ -7,7 +7,7 @@ import AddLocationIcon from '@mui/icons-material/AddLocation';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder } from '../State/Order/Action';
+import { createOrder, createPaymentLink } from '../State/Order/Action';
 import { useNavigate } from 'react-router-dom';
 import { addAddress } from '../State/Authentication/Action';
 import { data } from 'autoprefixer';
@@ -29,7 +29,7 @@ export const style = {
 
 const Cart = () => {
 
-    const { cart, auth } = useSelector(store => store);
+    const { cart, auth,order } = useSelector(store => store);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
@@ -41,7 +41,7 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     const handleOnSubmit = (values) => {
-      
+
         if (cart.cartItems.length == 0) {
             handleClose();
             Swal.fire({
@@ -81,39 +81,27 @@ const Cart = () => {
 
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    
-                    await cart.cartItems?.map((item) => {
-                        const data = {
-                            jwt: localStorage.getItem("jwt"),
-
-                            restaurantId: item.food?.restaurant.id,
-                            deliveryAddress: {
-                                fullName: auth.user?.fullName,
-                                streetAddress: values.streetAddress,
-                                city: values.city,
-                                mobile: values.mobile,
-                                locationType: values.location
-                            }
+                    const data = {
+                        jwt: localStorage.getItem("jwt"),
+                        total:cart?.cart?.total,
+                        deliveryAddress: {
+                            fullName: auth.user?.fullName,
+                            streetAddress: values.streetAddress,
+                            city: values.city,
+                            mobile: values.mobile,
+                            locationType: values.location
                         }
-                        dispatch(createOrder(data));
-                   
+                    }
+                    dispatch(createPaymentLink(data));
 
-                    })
-                    
-                    
-                    handleClose();
-                    Swal.fire({
-                        title: "Order create successfully",
-                        icon: "success"
-                    });
-                    
+
                 }
             });
         }
 
 
-      
-        
+
+
     }
 
 

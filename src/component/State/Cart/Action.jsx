@@ -181,10 +181,11 @@ export const clearCartAction = () => {
                 }
             }
             );
-
+            console.log("Cart clear succsesfully");
             dispach({ type: CLEAR_CART_SUCCESS, payload: data });
 
         } catch (error) {
+            console.log(error);
             dispach({ type: CLEAR_CART_FAILURE, payload: error.message });
         }
     }

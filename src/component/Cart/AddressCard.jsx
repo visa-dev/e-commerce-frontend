@@ -2,7 +2,7 @@ import { Button, Card } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder } from '../State/Order/Action';
+import { createOrder, createPaymentLink } from '../State/Order/Action';
 import Swal from 'sweetalert2';
 
 
@@ -12,7 +12,7 @@ const AddressCard = ({ item, handleClose }) => {
     const dispatch = useDispatch();
     // const dispatch = useDispatch();
     const createOrderUsingSelectedAddress = () => {
-       
+
         if (cart.cartItems.length == 0) {
             let timerInterval;
             Swal.fire({
@@ -51,26 +51,19 @@ const AddressCard = ({ item, handleClose }) => {
 
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    await cart.cartItems?.map((cartItem) => {
-                        const data = {
-                            jwt: localStorage.getItem("jwt"),
-
-                            restaurantId: cartItem.food?.restaurant.id,
-                            deliveryAddress: {
-                                fullName: auth.user?.fullName,
-                                streetAddress: item.streetAddress,
-                                city: item.city,
-                                mobile: item.mobile,
-                                locationType: item.locationType
-                            }
+                    const data = {
+                        jwt: localStorage.getItem("jwt"),
+                        total:cart?.cart?.total,
+                        deliveryAddress: {
+                            fullName: auth.user?.fullName,
+                            streetAddress: item.streetAddress,
+                            city: item.city,
+                            mobile: item.mobile,
+                            locationType: item.locationType
                         }
-                        dispatch(createOrder(data));
+                    }
+                    dispatch(createPaymentLink(data));
 
-                    })
-                    Swal.fire({
-                        title: "Order create successfully",
-                        icon: "success"
-                    });
                 }
             });
         }
