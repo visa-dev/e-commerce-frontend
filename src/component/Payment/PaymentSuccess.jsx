@@ -61,7 +61,7 @@ const PaymentSuccess = () => {
                
 
             });
-            
+            navigator("/profile/orders");
         } catch (error) {
             console.error("Error creating order:", error);
             // Handle error scenarios (e.g., show error message to user)
@@ -71,7 +71,7 @@ const PaymentSuccess = () => {
                 text: 'Failed to create order. Please try again later.',
             });
         } finally {
-            localStorage.clear();
+            localStorage.removeItem("orderCreated");
             setIsCreatingOrder(false);
         }
     };
