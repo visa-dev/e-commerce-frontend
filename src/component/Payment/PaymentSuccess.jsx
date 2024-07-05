@@ -61,7 +61,7 @@ const PaymentSuccess = () => {
                
 
             });
-            navigator("/profile/orders");
+            
         } catch (error) {
             console.error("Error creating order:", error);
             // Handle error scenarios (e.g., show error message to user)
