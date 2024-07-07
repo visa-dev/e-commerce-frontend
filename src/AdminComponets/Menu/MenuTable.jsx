@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFoodAction, getAllMenuItemsByRestaurantId, updateMenuItemsAvailability } from '../../component/State/Menu/Action';
 import Swal from 'sweetalert2';
+import { getIngredientsOfRestaurant } from '../../component/State/Ingredients/Action';
 
 const MenuTable = () => {
     const navigate = useNavigate();
@@ -14,8 +15,9 @@ const MenuTable = () => {
     const { restaurant, menu } = useSelector(store => store);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-    console.log(restaurant)
+    
+   
+  
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",

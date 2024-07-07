@@ -70,6 +70,7 @@ const Home = () => {
                                 options={restaurantNameList}
                                 onChange={handleRestaurantChange}
                                 value={selectedRestaurant}
+                        
                                 freeSolo
                                 renderInput={(params) => (
                                     <TextField
@@ -79,6 +80,7 @@ const Home = () => {
                                         margin='normal'
                                         variant='outlined'
                                         InputProps={{ ...params.InputProps, type: 'search' }}
+                                        sx
                                     />
                                 )}
                             />
