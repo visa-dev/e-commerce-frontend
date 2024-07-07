@@ -2,18 +2,23 @@
 import { Button, IconButton } from '@mui/material';
 import React from 'react'
 import { MdAddShoppingCart } from "react-icons/md";
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const CarouselItem = ({ image, title, price,restaurantId }) => {
+const CarouselItem = ({ image, title, price, restaurantId }) => {
 
-    const navigate=useNavigate();
-    
+    const navigate = useNavigate();
+    const { auth } = useSelector(store => store);
     const handleAddItemToCart = () => {
-        navigate(`/restaurant/${restaurantId}`);
-       
+        if (auth.user) {
+            navigate(`/restaurant/${restaurantId}`);
+        } else {
+            navigate('/account/login');
+        }
+
+
     }
-    
+
     return (
 
         <div className='flex flex-col items-center justify-center gap-1 p-6 '>

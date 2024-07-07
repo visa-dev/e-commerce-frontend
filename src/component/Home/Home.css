@@ -16,8 +16,7 @@
     position: relative;
     overflow: hidden; /* Hides overflow content */
     display: flex;
-    justify-content: center;
-    align-items: center;
+   
 }
 
 .banner-content {
@@ -45,17 +44,19 @@
 
 @media (max-width: 768px) {
     .banner {
+        width:'100%';
         background-size: contain;
-        background-position: center;
+        
         height: 50vh;
     }
 }
 
 @media (max-width: 480px) {
     .banner {
+        width:'100%';
         background-size: contain;
-        background-position: center;
-        height: 40vh;
+        
+        height: 30vh;
     }
 }
 

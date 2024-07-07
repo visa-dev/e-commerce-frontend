@@ -101,14 +101,7 @@ export const addToFavorite = ({ restaurantId, jwt }) => async (dispatch) => {
                 Authorization: `Bearer ${jwt}`
             }
         });
-        Swal.fire({
-            title: "successfully done",
-            timer: 1500,
-            icon: "success",
-            showConfirmButton: false
-
-        });
-
+   
         dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
         console.log("Add Favorites To", data);
     } catch (error) {
