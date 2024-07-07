@@ -47,7 +47,7 @@
         width:'100%';
         background-size: contain;
         
-        height: 50vh;
+        height: 40vh;
     }
 }
 
@@ -56,9 +56,16 @@
         width:'100%';
         background-size: contain;
         
-        height: 30vh;
+        height: 35vh;
     }
 }
+
+@media (max-width: 300px) {
+    .search-container {
+        flex-direction: column;
+    }
+}
+
 
 .logo{
     
