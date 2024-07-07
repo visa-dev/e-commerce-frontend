@@ -8,18 +8,17 @@ import { getAllEvents, getAllFoods, getAllRestaurantAction } from '../State/Rest
 import EventCard from '../Profile/EventCard';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import banner1 from '../../assets/BannerImages/banner1.jpg';
+import banner2 from '../../assets/BannerImages/banner2.jpg';
+
 
 const Home = () => {
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const { restaurant, loading, error } = useSelector(store => store);
 
-    const images = [
-        "https://img.freepik.com/free-vector/delivery-service-with-masks-concept_23-2148497067.jpg?t=st=1717260338~exp=1717263938~hmac=9442abfe0acd1f07dbae1ec13ee836842dd7f3754fa97b8dcd79472120f9509f&w=1060",
-        "https://img.freepik.com/free-photo/paper-bag-full-vegetables-table_1220-5377.jpg?w=1060",
-        "https://img.freepik.com/free-photo/close-up-hands-holding-delivery-boxes_23-2148892913.jpg?w=1060",
-        "https://img.freepik.com/free-photo/delivery-man-wearing-mask-handling-paper-bag-with-food-us-customer-service-sign-delivery-service-concept_255994-876.jpg?w=1060",
-        "https://img.freepik.com/free-photo/close-up-delivery-man-mask-giving-orders_23-2148855210.jpg?w=1060"
+    const bannerImages = [
+        banner1, banner2
     ];
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -29,7 +28,7 @@ const Home = () => {
         const interval = setInterval(() => {
             setFadeIn(false);
             setTimeout(() => {
-                setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
+                setCurrentImageIndex(prevIndex => (prevIndex + 1) % bannerImages.length);
                 setFadeIn(true);
             }, 1000); // Match the duration of the transition
         }, 5000);
@@ -63,7 +62,7 @@ const Home = () => {
                 >
                     <section
                         className={`relative flex flex-col items-center justify-center banner -z-50 ${fadeIn ? 'fade-enter' : 'fade-exit'}`}
-                        style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
+                        style={{ backgroundImage:bannerImages[currentImageIndex] }}
                     >
                         <div className='w-[50vw] z-10 text-center text-black'>
                             <p className='z-10 py-5 text-2xl font-bold lg:text-7xl'>
