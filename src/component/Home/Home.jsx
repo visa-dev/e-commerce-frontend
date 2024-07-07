@@ -13,27 +13,24 @@ const Home = () => {
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const { restaurant } = useSelector(store => store);
-
+    
     return (
         <div className='pb-10'>
-            <section className='relative flex flex-col items-center justify-center banner -z-50'>
-                <div className='w-[50vw] z-10 text-center text-black'>
-
-                    <p className='z-10 py-5 text-2xl font-bold lg:text-7xl '>
-                        Fast Food
+            <section className='relative flex flex-col items-center justify-center banner'>
+                <div className='w-[50vw] z-10 text-center banner-content'>
+                    <p className='py-5 text-2xl font-bold lg:text-7xl' style={{ letterSpacing: '0.4rem' }}>
+                        Fast Foods
                     </p>
-                    <p className='z-10 text-xl text-red-90 lg:text-5xl'>
-                        Taste the Convenience Food, Fast and Deliverd.
-                    </p >
-
+                    <p className='text-xl lg:text-5xl'>
+                        Taste the Convenience Food, Fast and Delivered.
+                    </p>
                 </div>
-
-
             </section>
+
 
             <section className='p-10 lg:py-10 lg:px-20'>
                 <p className='py-3 pb-5 text-2xl font-semibold text-gray-400'>Top Meels</p>
-                <MultiItemCarousel foods={restaurant?.foods}/>
+                <MultiItemCarousel foods={restaurant?.foods} />
             </section>
             <Divider />
 
@@ -49,7 +46,7 @@ const Home = () => {
 
             <Divider className='pt-10' />
 
-            {jwt && <div>
+            {<div>
                 <Divider />
                 <section className='px-5 pt-10 lg:px-20'>
                     <h1 className='pb-8 text-2xl font-semibold text-gray-400'>Events </h1>

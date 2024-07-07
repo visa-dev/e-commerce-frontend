@@ -12,22 +12,22 @@ const MultiItemCarousel = ({foods}) => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 600,
         slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 1500,
+        autoplaySpeed: 1600,
         arrows: false,
         responsive: [
             {
-              breakpoint: 1024, 
+              breakpoint: 1200, 
               settings: {
-                slidesToShow: 5,
+                slidesToShow: 2,
                 slidesToScroll: 1,
               }
             },
             {
-              breakpoint: 600, 
+              breakpoint: 980, 
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -41,7 +41,7 @@ const MultiItemCarousel = ({foods}) => {
 
             <Slider {...settings}>
                 {
-                    foods?.map((item) => <CarouselItem key={item} image={item.images[0]} title={item?.name} price={item?.price} />)
+                    foods?.map((item) => <CarouselItem key={item} image={item.images[0]} title={item?.name} price={item?.price} restaurantId={item?.restaurant?.id} />)
                 }
             </Slider>
 

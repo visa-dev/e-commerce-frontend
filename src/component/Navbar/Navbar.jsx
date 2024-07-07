@@ -31,13 +31,7 @@ const Navbar = ({ handleDrawer, isAddmin }) => {
         if (auth.user) {
             navigate("/cart");
         } else {
-            Swal.fire({
-                icon: "error",
-                title: "Waring..!!",
-                text: "You need to login first",
-                footer: '<a href="/account/login">Click hear to login</a>'
-
-            });
+            navigate('account/login');
         }
     }
 
