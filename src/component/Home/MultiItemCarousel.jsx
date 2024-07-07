@@ -12,11 +12,11 @@ const MultiItemCarousel = ({foods}) => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 600,
+        speed: 700,
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         autoplay: true,
-        autoplaySpeed: 1600,
+        autoplaySpeed: 1800,
         arrows: false,
         responsive: [
             {
@@ -37,7 +37,7 @@ const MultiItemCarousel = ({foods}) => {
     };
 
     return (
-        <div className='border'>
+        <div className='border border-gray-400'>
 
             <Slider {...settings}>
                 {
