@@ -87,6 +87,7 @@ const Home = () => {
         <div className='pb-10'>
             <div>
                 <section className='relative flex flex-col items-center justify-evenly banner'>
+                    
                     <Grid container spacing={2} className='items-center justify-center'>
                         <Grid item xs={8}>
                             <StyledAutocomplete
@@ -99,7 +100,7 @@ const Home = () => {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        placeholder='Search Restaurant'
+                                        placeholder='Search Opened Restaurant'
                                         margin="normal"
                                         variant="outlined"
                                         InputProps={{ ...params.InputProps, type: 'search' }}
@@ -108,7 +109,7 @@ const Home = () => {
                             />
 
                         </Grid>
-
+                        
                         <Grid item >
                             <Button
                                 color='primary'
