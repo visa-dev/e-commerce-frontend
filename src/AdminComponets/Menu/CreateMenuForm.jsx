@@ -10,6 +10,17 @@ import { createMenuItem } from '../../component/State/Menu/Action';
 import { getIngredientsOfRestaurant } from '../../component/State/Ingredients/Action';
 import { useNavigate } from 'react-router-dom';
 
+const initialValues = {
+    name: "",
+    description: "",    
+    price:null,
+    category: null,
+    restaurantId: "",
+    vegetarian: true,
+    seasonal: false,
+    ingredients: [],
+    images: []
+};
 
 const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
@@ -36,7 +47,7 @@ const CreateMenuForm = () => {
     const [uploadImage, setUploadImage] = useState(false);
 
     const formik = useFormik({
-        
+        initialValues,
         validationSchema,
         onSubmit: (values) => {
             values.restaurantId = restaurant.usersRestaurant.id;
