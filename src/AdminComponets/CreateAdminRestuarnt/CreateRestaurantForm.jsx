@@ -38,7 +38,7 @@ const CreateRestaurantForm = () => {
 
 
   const formik = useFormik({
-    initialValues,
+   
     validationSchema,
     onSubmit: (values) => {
 

@@ -15,6 +15,7 @@ const MenuTable = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+    console.log(restaurant)
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -50,6 +51,14 @@ const MenuTable = () => {
         }));
     }
 
+    const handleNaviagteAddMenuItem = () => {
+        if (
+            true
+        ) {
+            navigate("/admin/restaurants/add-menu")
+        }
+    }
+
 
     return (
         <Box>
@@ -58,7 +67,7 @@ const MenuTable = () => {
                     title={"Menu"}
                     sx={{ pt: 2, alignItems: "center" }}
                     action={
-                        <IconButton onClick={() => navigate("/admin/restaurants/add-menu")}>
+                        <IconButton onClick={handleNaviagteAddMenuItem}>
                             <CreateIcon />
                         </IconButton>
                     }

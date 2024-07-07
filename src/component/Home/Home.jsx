@@ -74,6 +74,7 @@ const Home = () => {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
+                                        style={{border:'1px solid white'}}
                                         placeholder='Search Opened Restaurant'
                                         margin='normal'
                                         variant='outlined'
