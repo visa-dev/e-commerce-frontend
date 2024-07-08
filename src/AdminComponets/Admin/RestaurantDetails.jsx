@@ -20,35 +20,36 @@ const RestaurantDetails = () => {
   }
 
   const handleRestuarntDelete = async () => {
-    try {
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Delete"
-      });
+    alert("Not devloped yet... soon");
+    // try {
+    //   const result = await Swal.fire({
+    //     title: "Are you sure?",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Delete"
+    //   });
   
-      if (result.isConfirmed) {
-        await dispatch(deleteRestaurant({ restaurantId: restaurant?.usersRestaurant?.id, jwt }));
-        await navigator('/');
-        await dispatch(logout());
+    //   if (result.isConfirmed) {
+    //     await dispatch(deleteRestaurant({ restaurantId: restaurant?.usersRestaurant?.id, jwt }));
+    //     await navigator('/');
+    //     await dispatch(logout());
   
-        Swal.fire({
-          title: "Deleted!",
-          text: "Restaurant has been deleted.",
-          icon: "success"
-        });
-      }
-    } catch (error) {
-      console.error("Error deleting restaurant:", error);
-      Swal.fire({
-        title: "Error",
-        text: "Failed to delete restaurant.",
-        icon: "error"
-      });
-    }
+    //     Swal.fire({
+    //       title: "Deleted!",
+    //       text: "Restaurant has been deleted.",
+    //       icon: "success"
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error("Error deleting restaurant:", error);
+    //   Swal.fire({
+    //     title: "Error",
+    //     text: "Failed to delete restaurant.",
+    //     icon: "error"
+    //   });
+    // }
   };
   
 
