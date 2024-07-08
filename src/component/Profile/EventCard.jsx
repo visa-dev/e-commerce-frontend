@@ -48,9 +48,7 @@ const EventCard = ({ event }) => {
                     <Typography variant='h5'>
                         {event.eventName}
                     </Typography>
-                    <Typography variant='h5'>
-                        {event?.restaurant.name}
-                    </Typography>
+                  
                     
                     <Typography variant='body'>
                         50% off on your first order
