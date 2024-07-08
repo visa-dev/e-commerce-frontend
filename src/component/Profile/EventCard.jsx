@@ -7,7 +7,8 @@ import Swal from 'sweetalert2';
 
 
 const EventCard = ({ event }) => {
-    const { restaurant } = useSelector(store => store);
+    const { auth } = useSelector(store => store);
+    
     const jwt = localStorage.getItem("jwt");
     const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ const EventCard = ({ event }) => {
                     </div>
                 </CardContent>
                 <CardActions >
-                    {restaurant?.usersRestaurant && (
+                    {auth?.user?.role === "ROLE_RESTAURANT_OWNER" && (
                         <Box ml="auto">
                             <IconButton onClick={handleDeleteEvent}>
                                 <DeleteIcon sx={{ color: 'red' }} />
