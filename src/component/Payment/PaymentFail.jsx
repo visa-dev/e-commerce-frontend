@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Button } from '@mui/material';
 import Lottie from 'lottie-react';
 import paymentAnimation from '../../assets/payment_fail.json';

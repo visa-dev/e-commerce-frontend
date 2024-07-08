@@ -87,9 +87,7 @@ const restaurantReducer = (state = initialState, action) => {
                 restaurants: state.restaurants.filter(
                     (item) => item.id !== action.payload
                 ),
-                usersRestaurnat: state.usersRestaurnat.filter(
-                    (item) => item.id !== action.payload
-                )
+                usersRestaurnat:null
             }
 
         case actionTypes.CREATE_EVENTS_SUCCESS:

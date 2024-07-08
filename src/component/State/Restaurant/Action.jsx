@@ -171,22 +171,17 @@ export const deleteRestaurant = ({ restaurantId, jwt }) => {
         dispatch({ type: DELETE_RESTAURANT_REQUEST });
         try {
 
-            const { response } = await api.delete(`/api/admin/restaurant/${restaurantId}`,
+            const { response } = await api.delete(`/api/admin/restaurants/${restaurantId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${jwt}`
                     }
                 }
             );
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "delete restaurnt successfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
+           
+           
             dispatch({ type: DELETE_RESTAURANT_SUCCESS, payload: restaurantId });
-            console.log("Delete Restaurant ", response.data);
+            
 
         } catch (error) {
             dispatch({ type: DELETE_RESTAURANT_FAILURE, payload: error });
@@ -334,7 +329,7 @@ export const deleteEvent = ({ eventId, jwt }) => {
             );
            
             dispatch({ type: DELETE_EVENTS_SUCCESS, payload: eventId });
-            console.log("Delete Event ", response.data);
+           
 
         } catch (error) {
             dispatch({ type: DELETE_EVENTS_FAILURE, payload: error });

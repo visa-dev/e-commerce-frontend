@@ -3,7 +3,9 @@ import React from 'react'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateRestaurantStatus } from '../../component/State/Restaurant/Action';
+import { deleteRestaurant, updateRestaurantStatus } from '../../component/State/Restaurant/Action';
+import Swal from 'sweetalert2';
+import { logout } from '../../component/State/Authentication/Action';
 
 const RestaurantDetails = () => {
 
@@ -17,10 +19,44 @@ const RestaurantDetails = () => {
 
   }
 
+  const handleRestuarntDelete = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete"
+      });
+  
+      if (result.isConfirmed) {
+        await dispatch(deleteRestaurant({ restaurantId: restaurant?.usersRestaurant?.id, jwt }));
+        await navigator('/');
+        await dispatch(logout());
+  
+        Swal.fire({
+          title: "Deleted!",
+          text: "Restaurant has been deleted.",
+          icon: "success"
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting restaurant:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to delete restaurant.",
+        icon: "error"
+      });
+    }
+  };
+  
+
+
   return (
-    <div className='lg:px-20 px-5 pb-10 '>
-      <div className='py-5 flex justify-center items-center gap-5'>
-        <h1 className='text-2xl lg:text-7xl text-center font-bold p-5'>{restaurant?.usersRestaurant?.name}</h1>
+    <div className='px-5 pb-10 lg:px-20 '>
+      <div className='flex items-center justify-center gap-5 py-5'>
+        <h1 className='p-5 text-2xl font-bold text-center lg:text-7xl'>{restaurant?.usersRestaurant?.name}</h1>
         <div>
           <Button color={restaurant?.usersRestaurant?.open ? "primary" : "green"} className='py-[1rem] px-[2rem]' variant='contained' onClick={handleRestaurntStatus} size='large'>
             {restaurant?.usersRestaurant?.open ? "Close" : "Open"}
@@ -64,12 +100,14 @@ const RestaurantDetails = () => {
                 <p className='w-48'>Status</p>
                 <p className='text-gray-400'>
                   <span className='pr-5'>-</span>
-                  {restaurant?.usersRestaurant?.open ? <span className='px-5 py-2 rounded-full bg-green-400 text-gray-950'>Open
-                  </span> : <span className='px-5 py-2 rounded-full bg-red-400 text-gray-950'>Closed</span>}
+                  {restaurant?.usersRestaurant?.open ? <span className='px-5 py-2 bg-green-400 rounded-full text-gray-950'>Open
+                  </span> : <span className='px-5 py-2 bg-red-400 rounded-full text-gray-950'>Closed</span>}
                 </p>
               </div>
             </CardContent>
+
           </Card>
+
         </Grid>
 
         <Grid item xs={12} lg={6}>
@@ -129,7 +167,7 @@ const RestaurantDetails = () => {
               </div>
               <div className='flex'>
                 <p className='w-48'>Social</p>
-                <div className='flex items-center pb-4 gap-2'>
+                <div className='flex items-center gap-2 pb-4'>
                   <span className='pr-5'>-</span>
                   <a href={restaurant?.usersRestaurant?.contactInformation?.instagram}><InstagramIcon sx={{ fontSize: "3rem" }} /></a>
                   <a href={restaurant?.usersRestaurant?.contactInformation?.facebook}><FacebookIcon sx={{ fontSize: "3rem" }} /></a>
@@ -140,6 +178,14 @@ const RestaurantDetails = () => {
           </Card>
         </Grid>
       </Grid>
+      <div className='py-2'>
+        <Button
+          onClick={handleRestuarntDelete}
+          sx={{ p: '10px' }}
+          variant='contained'
+          color='primary'
+        >Delete restaurant</Button>
+      </div>
     </div>
   )
 }
