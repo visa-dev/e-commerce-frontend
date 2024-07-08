@@ -290,8 +290,9 @@ const CreateMenuForm = () => {
                                 variant='contained'
                                 fullWidth
                                 type='submit'
+                                disabled={restaurant?.loading}
                             >
-                                Submit
+                                Create Restaurnt
                             </Button>
                         </Grid>
                     </Grid>

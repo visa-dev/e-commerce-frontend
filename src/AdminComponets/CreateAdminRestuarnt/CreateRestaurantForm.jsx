@@ -48,11 +48,8 @@ const CreateRestaurantForm = () => {
   const jwt = localStorage.getItem("jwt");
   const [uploadImage, setUploadImage] = useState(false);
 
-  const { auth } = useSelector(store => store);
-
-
-
   const formik = useFormik({
+    
     initialValues,
     validationSchema,
     onSubmit: (values) => {
@@ -79,7 +76,6 @@ const CreateRestaurantForm = () => {
         images: values.images, // Assuming you want to include uploaded images
       };
 
-      console.log(jwt);
       dispatch(createRestaurant({ data, token: jwt }));
     }
 
