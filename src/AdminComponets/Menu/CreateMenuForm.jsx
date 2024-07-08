@@ -10,11 +10,12 @@ import { createMenuItem } from '../../component/State/Menu/Action';
 import { getIngredientsOfRestaurant } from '../../component/State/Ingredients/Action';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { getRestaurantCategory } from '../../component/State/Restaurant/Action';
 
 const initialValues = {
     name: "",
-    description: "",    
-    price:null,
+    description: "",
+    price: null,
     category: null,
     restaurantId: "",
     vegetarian: true,
@@ -36,23 +37,26 @@ const CreateMenuForm = () => {
     const jwt = localStorage.getItem("jwt");
     const { restaurant, ingredient } = useSelector(store => store);
     console.log(restaurant)
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     useEffect(() => {
-        
-        
+
+
+
         if (restaurant?.usersRestaurant?.id) {
             dispatch(getIngredientsOfRestaurant({
                 id: restaurant.usersRestaurant.id,
                 jwt
             }));
+            console.log(restaurant.usersRestaurant.id)
+            dispatch(getRestaurantCategory({ jwt, restaurantId: restaurant.usersRestaurant.id }));
         }
-        
-        if(restaurant?.categories?.length<0){
+
+        if (restaurant?.categories?.length < 0) {
             Swal.fire({
                 title: "Resturant category empty",
-               
+
                 icon: "question"
-              });
+            });
             navigate('/admin/restaurants/category');
         }
     }, [dispatch, jwt, restaurant?.usersRestaurant?.id]);
@@ -66,7 +70,7 @@ const CreateMenuForm = () => {
             values.restaurantId = restaurant.usersRestaurant.id;
             dispatch(createMenuItem({ menu: values, jwt }));
 
-        navigate('/admin/restaurants/menu');
+            navigate('/admin/restaurants/menu');
         }
     });
 

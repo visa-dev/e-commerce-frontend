@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 const MultiItemCarousel = ({foods}) => {
 
 
-
+console.log(foods)
 
     const settings = {
         dots: true,
