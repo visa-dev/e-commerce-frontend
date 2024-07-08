@@ -108,7 +108,7 @@ const Home = () => {
             </div>
 
             <section className='p-10 lg:py-10 lg:px-20'>
-                <p className='py-3 pb-5 text-2xl font-semibold text-gray-400'>Top Meals</p>
+                <p className='py-3 pb-5 text-2xl font-semibold text-gray-400'>Top Menu</p>
                 <MultiItemCarousel foods={restaurant?.foods} />
             </section>
             <Divider />
