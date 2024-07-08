@@ -14,7 +14,7 @@ const Event = () => {
       {restaurant?.restaurantsEvents && restaurant?.restaurantsEvents.length > 0 ? (
         <div className='flex flex-wrap gap-5 px-5 py-5 mt-5'>
           {restaurant.restaurantsEvents.map(event => (
-            <EventCard key={event.id} event={event} />
+            <EventCard  key={event.id} event={event} />
           ))}
         </div>
       ) : (

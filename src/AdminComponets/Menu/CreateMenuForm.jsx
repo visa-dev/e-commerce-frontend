@@ -47,7 +47,7 @@ const CreateMenuForm = () => {
                 id: restaurant.usersRestaurant.id,
                 jwt
             }));
-            console.log(restaurant.usersRestaurant.id)
+          
             dispatch(getRestaurantCategory({ jwt, restaurantId: restaurant.usersRestaurant.id }));
         }
 

@@ -22,7 +22,7 @@ const FoodCategoryTable = () => {
 
         dispatch(getRestaurantCategory({ jwt, restaurantId: restaurantId }));
 
-}, []);
+}, [jwt,restaurantId]);
 
 
 

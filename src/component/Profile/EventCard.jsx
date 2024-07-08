@@ -1,12 +1,42 @@
 import React from 'react'
-import { Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteEvent } from '../State/Restaurant/Action';
+import Swal from 'sweetalert2';
 
 
 const EventCard = ({ event }) => {
     const { restaurant } = useSelector(store => store);
- 
+    const jwt = localStorage.getItem("jwt");
+    const dispatch = useDispatch();
+
+    const handleDeleteEvent = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                dispatch(deleteEvent({
+                    eventId: event?.id,
+                    jwt: jwt
+                }));
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "event has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+       
+
+    }
+
 
     return (
         <div>
@@ -27,10 +57,14 @@ const EventCard = ({ event }) => {
                         <p className='text-sm text-red-600'>{event.endDate}</p>
                     </div>
                 </CardContent>
-                <CardActions>
-                    {restaurant?.usersRestaurant != null && <IconButton>
-                        <DeleteIcon />
-                    </IconButton>}
+                <CardActions >
+                    {restaurant?.usersRestaurant && (
+                        <Box ml="auto">
+                            <IconButton onClick={handleDeleteEvent}>
+                                <DeleteIcon sx={{ color: 'red' }} />
+                            </IconButton>
+                        </Box>
+                    )}
                 </CardActions>
             </Card>
         </div>
