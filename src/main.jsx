@@ -8,7 +8,7 @@ import { store } from './component/State/store.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+ 
     <BrowserRouter>
 
       <Provider store={store}>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
     </BrowserRouter>
 
-  </React.StrictMode>,
+  
 )

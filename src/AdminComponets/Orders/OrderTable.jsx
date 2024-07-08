@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup, Box, Button, Card, CardHeader, Chip, Menu, MenuIte
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurantsOrder, updateOrderStatus } from '../../component/State/RestaurantOrder/Action';
-
+import { format, parseISO } from 'date-fns';
 const orderStatus = [
     { label: "Pending", value: "PENDING" },
     { label: "Completed", value: "COMPLETED" },
@@ -11,12 +11,15 @@ const orderStatus = [
 ];
 
 const OrderTable = ({ status }) => {
+    
+    
+    
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const { restaurant, restaurantOrder } = useSelector(store => store);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
+    
     useEffect(() => {
         if (restaurant.usersRestaurant?.id) {
             dispatch(fetchRestaurantsOrder({
@@ -53,7 +56,7 @@ const OrderTable = ({ status }) => {
     };
 
     const filteredOrders = restaurantOrder?.orders?.filter(order => status === "ALL" || order.orderStatus === status);
-
+    console.log(filteredOrders)
     return (
         <Box>
             <Card className='mt-1'>
@@ -72,6 +75,7 @@ const OrderTable = ({ status }) => {
                             <TableCell align="center">Price</TableCell>
                             <TableCell align="center">Name</TableCell>
                             <TableCell align="center">Ingredients</TableCell>
+                            <TableCell align="center">Time</TableCell>
                             <TableCell align="center">Status</TableCell>
                             {/* <TableCell align="center">Update</TableCell> */}
                         </TableRow>
@@ -114,6 +118,11 @@ const OrderTable = ({ status }) => {
                                             ))}
                                         </div>
                                     ))}
+                                </TableCell>
+                                <TableCell>
+                                    {
+                                        format(parseISO(row.createdAt),"dd/MM/yyyy hh:mm a")
+                                    }
                                 </TableCell>
                                 <TableCell align="center">{row.orderStatus}
                                 <div>

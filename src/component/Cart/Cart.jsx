@@ -51,7 +51,7 @@ const Cart = () => {
     }, [jwt, dispatch]);
 
     const handleAddItemsNavigation = () => {
-        alert(auth?.user?.favorites.length)
+  
         auth?.user?.favorites.length > 0 ? navigate('/profile/favorites') : (navigate('/'))
     }
 
