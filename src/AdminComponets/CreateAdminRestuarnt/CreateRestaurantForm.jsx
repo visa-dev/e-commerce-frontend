@@ -47,7 +47,7 @@ const CreateRestaurantForm = () => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const [uploadImage, setUploadImage] = useState(false);
-  const [loading, setLoading] = false;
+  const [loading, setLoading] =useState(false);
   
   const formik = useFormik({
     initialValues,

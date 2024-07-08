@@ -119,21 +119,21 @@ const RestaurantDetails = () => {
                 <p className='w-48'>Country</p>
                 <p className='text-gray-400'>
                   <span className='pr-5'>-</span>
-                  Srilanka
+                  {restaurant?.usersRestaurant?.country}
                 </p>
               </div>
               <div className='flex'>
                 <p className='w-48'>City</p>
                 <p className='text-gray-400'>
                   <span className='pr-5'>-</span>
-                  Kegalle
+                  {restaurant?.usersRestaurant?.country}
                 </p>
               </div>
               <div className='flex'>
                 <p className='w-48'>Postal Code</p>
                 <p className='text-gray-400'>
                   <span className='pr-5'>-</span>
-                  71050
+                  {restaurant?.usersRestaurant?.country}
                 </p>
               </div>
               <div className='flex'>
