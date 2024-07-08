@@ -47,13 +47,13 @@ const CreateRestaurantForm = () => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const [uploadImage, setUploadImage] = useState(false);
-
+  const [loading, setLoading] = false;
+  
   const formik = useFormik({
-    
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-
+    onSubmit: async (values, { resetForm }) => {
+      setLoading(true);
       const data = {
         name: values.name,
         description: values.description,
@@ -65,22 +65,28 @@ const CreateRestaurantForm = () => {
           postalCode: values.postalCode,
           country: values.country,
         },
-        contactInformation
-          : {
+        contactInformation: {
           email: values.email,
           mobile: values.mobile,
           facebook: values.facebook,
           instagram: values.instagram,
         },
         openingHours: values.openingHours,
-        images: values.images, // Assuming you want to include uploaded images
+        images: values.images,
       };
-
-      dispatch(createRestaurant({ data, token: jwt }));
-    }
-
-
+  
+      try {
+        await dispatch(createRestaurant({ data, token: jwt }));
+        setLoading(false);
+        resetForm();
+      } catch (error) {
+        setLoading(false);
+        console.error('Error creating restaurant:', error);
+        
+      }
+    },
   });
+  
 
   const handleImageChange = async (e) => {
 
@@ -327,7 +333,9 @@ const CreateRestaurantForm = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button type='submit' variant='contained' color='primary'>
+              <Button
+              disabled={loading}
+              type='submit' variant='contained' color='primary'>
                 Create Restaurant
               </Button>
             </Grid>

@@ -37,7 +37,7 @@ const CreateMenuForm = () => {
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const { restaurant, ingredient } = useSelector(store => store);
-    console.log(restaurant)
+   
     const navigate = useNavigate();
     useEffect(() => {
 
@@ -48,7 +48,7 @@ const CreateMenuForm = () => {
                 id: restaurant.usersRestaurant.id,
                 jwt
             }));
-          
+
             dispatch(getRestaurantCategory({ jwt, restaurantId: restaurant.usersRestaurant.id }));
         }
 
@@ -65,12 +65,14 @@ const CreateMenuForm = () => {
     const [uploadImage, setUploadImage] = useState(false);
 
     const formik = useFormik({
+        
         initialValues,
         validationSchema,
         onSubmit: (values) => {
+            
             values.restaurantId = restaurant.usersRestaurant.id;
             dispatch(createMenuItem({ menu: values, jwt }));
-
+            
             navigate('/admin/restaurants/menu');
         }
     });
