@@ -6,15 +6,16 @@ import { createOrder, createPaymentLink } from '../State/Order/Action';
 import Swal from 'sweetalert2';
 
 
-const AddressCard = ({ item, handleClose }) => {
+const AddressCard = ({ item,}) => {
 
     const { cart, auth } = useSelector(store => store);
     const dispatch = useDispatch();
     const showSelectButton = !location.pathname.includes('/profile/address')
     const createOrderUsingSelectedAddress = () => {
+        console.log(item)
 
         if (cart.cartItems.length == 0) {
-            let timerInterval;
+           
             Swal.fire({
                 icon: "question",
                 text: "Cart is empty",

@@ -18,7 +18,7 @@ const AdminRouter = () => {
       
       <Routes>
         <Route>
-          <Route path='/*' element={restaurant?.usersRestaurant ? <Admin /> : (<CreateRestaurantForm /> )} />
+          <Route path='/*' element={auth?.user?.role === "ROLE_RESTAURANT_OWNER" ? <Admin /> : (<CreateRestaurantForm /> )} />
         </Route>
       </Routes>
     </div>
